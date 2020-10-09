@@ -1,7 +1,8 @@
-package com.jess.zapchallenge
+package com.jess.zapchallenge.home.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.jess.zapchallenge.R
 
 class HomeActivity : AppCompatActivity() {
 
