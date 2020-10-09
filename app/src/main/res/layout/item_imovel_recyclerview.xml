@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imovel_image"
+            android:layout_width="match_parent"
+            android:layout_height="230dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <TextView
+            android:id="@+id/imovel_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imovel_image"
+            tools:text="Apartamento" />
+
+        <TextView
+            android:id="@+id/imovel_neighborhood"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="24dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imovel_type"
+            tools:text="Alameda dos Nhamiquaras" />
+
+        <TextView
+            android:id="@+id/imovel_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imovel_neighborhood"
+            tools:text="Moema, Sao Paulo" />
+
+        <ImageView
+            android:id="@+id/imageViewArea"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="24dp"
+            android:src="@drawable/ic_map"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imovel_city" />
+
+        <TextView
+            android:id="@+id/imovel_usableAreas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            app:layout_constraintStart_toEndOf="@+id/imageViewArea"
+            app:layout_constraintTop_toTopOf="@+id/imageViewArea"
+            tools:text="35m" />
+
+        <ImageView
+            android:id="@+id/imageViewBadroom"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="24dp"
+            android:src="@drawable/ic_hotel"
+            app:layout_constraintStart_toEndOf="@+id/imovel_usableAreas"
+            app:layout_constraintTop_toBottomOf="@+id/imovel_city" />
+
+        <TextView
+            android:id="@+id/imovel_badroom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            app:layout_constraintStart_toEndOf="@+id/imageViewBadroom"
+            app:layout_constraintTop_toTopOf="@+id/imageViewBadroom"
+            tools:text="1 quarto" />
+
+        <ImageView
+            android:id="@+id/imageViewBathrooms"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="24dp"
+            android:src="@drawable/ic_bathtub"
+            app:layout_constraintStart_toEndOf="@+id/imovel_badroom"
+            app:layout_constraintTop_toBottomOf="@+id/imovel_city" />
+
+        <TextView
+            android:id="@+id/imovel_bathrooms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            app:layout_constraintStart_toEndOf="@+id/imageViewBathrooms"
+            app:layout_constraintTop_toTopOf="@+id/imageViewBathrooms"
+            tools:text="1 banheiro" />
+
+        <ImageView
+            android:id="@+id/imageViewParkingSpaces"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="24dp"
+            android:src="@drawable/ic_car"
+            app:layout_constraintStart_toEndOf="@+id/imovel_bathrooms"
+            app:layout_constraintTop_toBottomOf="@+id/imovel_city" />
+
+        <TextView
+            android:id="@+id/imovel_parkingSpaces"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            app:layout_constraintStart_toEndOf="@+id/imageViewParkingSpaces"
+            app:layout_constraintTop_toTopOf="@+id/imageViewParkingSpaces"
+            tools:text="2 vagas" />
+
+        <TextView
+            android:id="@+id/imovel_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="24dp"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewArea"
+            tools:text="Aluguel R$ 2.500" />
+
+        <TextView
+            android:id="@+id/imovel_rental_total_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imovel_price"
+            tools:text="Total R$ 2.932" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>
