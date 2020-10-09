@@ -1,18 +1,18 @@
 package com.jess.zapchallenge.home.view
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.jess.zapchallenge.R
 import com.jess.zapchallenge.home.model.PropertieResultItem
 import com.jess.zapchallenge.home.view.adapter.PropertiesAdapter
+import com.jess.zapchallenge.home.view.adapter.TYPE_GROUP
 import com.jess.zapchallenge.home.viewmodel.PropertieViewModel
 import com.jess.zapchallenge.home.viewmodel.propertieevent.PropertieEvent
 import com.jess.zapchallenge.home.viewmodel.propertieinteractor.PropertieInteractor
@@ -32,11 +32,13 @@ class HomeFragment : Fragment() {
         )
     }
 
+    private var seasonNumber: Long = 1
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
@@ -44,6 +46,11 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         recyclerViewImoveis.layoutManager = LinearLayoutManager(context)
         recyclerViewImoveis.adapter = adapter
+
+        arguments?.takeIf { it.containsKey(TYPE_GROUP) }?.apply {
+            seasonNumber = getLong(TYPE_GROUP)
+        }
+
         initViewModel()
     }
 
@@ -87,4 +94,5 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
 }
