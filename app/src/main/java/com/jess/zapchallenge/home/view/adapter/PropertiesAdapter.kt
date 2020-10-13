@@ -52,8 +52,8 @@ class PropertiesAdapter(
             propertieBadroom.text = propertie.bedrooms.toString()
             propertieBathroom.text = propertie.bathrooms.toString()
             propertieParkingSpaces.text = propertie.parkingSpaces.toString()
-            propertiePrice.text = propertie.pricingInfos.price
-            propertieTotalPrice.text = propertie.pricingInfos.price
+            propertiePrice.text = itemView.resources.getString(R.string.propertie_price, propertie.pricingInfos.price)
+            propertieTotalPrice.text = itemView.resources.getString(R.string.propertie_total_price, propertie.pricingInfos.price)
         }
     }
 

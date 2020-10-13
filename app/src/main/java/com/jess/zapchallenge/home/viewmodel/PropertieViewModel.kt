@@ -32,7 +32,7 @@ class PropertieViewModel : ViewModel() {
                 val propertiesList = withContext(Dispatchers.IO){
                     _useCase.getProperties()
                 }
-                _state.value = PropertieState.PropertiesListSuccess(propertiesList.propertiesList)
+                _state.value = PropertieState.PropertiesListSuccess(propertiesList)
                 _event.value = PropertieEvent.Loading(false)
             }catch (ex: Exception){
                 errorApi(ex.message.toString())
