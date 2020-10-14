@@ -58,10 +58,6 @@ class PropertiesAdapter(
                 itemView.resources.getString(
                     R.string.propertie_price, propertie.pricingInfos.price
                 )
-            propertiePrice.text = itemView.resources.getString(
-                R.string.propertie_price,
-                propertie.pricingInfos.price
-            )
         }
     }
 

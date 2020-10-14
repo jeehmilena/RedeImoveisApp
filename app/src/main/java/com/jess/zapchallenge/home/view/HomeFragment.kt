@@ -6,8 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jess.zapchallenge.Constants.LIST_PROPERTIES
 import com.jess.zapchallenge.Constants.TYPE_GROUP
@@ -15,9 +13,6 @@ import com.jess.zapchallenge.R
 import com.jess.zapchallenge.home.model.PropertieResultItem
 import com.jess.zapchallenge.home.view.adapter.PropertiesAdapter
 import com.jess.zapchallenge.home.viewmodel.PropertieViewModel
-import com.jess.zapchallenge.home.viewmodel.propertieevent.PropertieEvent
-import com.jess.zapchallenge.home.viewmodel.propertieinteractor.PropertieInteractor
-import com.jess.zapchallenge.home.viewmodel.propertiestate.PropertieState
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
@@ -47,7 +42,7 @@ class HomeFragment : Fragment() {
         }
 
         _listProperties = _viewModel.listFilter(_propertieGroup.toInt())
-        _adapter.list = _listProperties
+        _adapter.update(_listProperties)
 
         recyclerViewImoveis.layoutManager = LinearLayoutManager(context)
         recyclerViewImoveis.adapter = _adapter

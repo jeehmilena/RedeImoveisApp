@@ -12,7 +12,9 @@ data class PricingInfos(
     @SerializedName("monthlyCondoFee")
     val monthlyCondoFee: String = "",
     @SerializedName("price")
-    val price: String = "",
+    var price: String = "",
+    @SerializedName("rentalTotalPrice")
+    var rentalTotalPrice: String = "",
     @SerializedName("yearlyIptu")
     val yearlyIptu: String = ""
-): Parcelable
+) : Parcelable
