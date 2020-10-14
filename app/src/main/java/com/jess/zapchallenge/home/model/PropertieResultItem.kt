@@ -1,8 +1,11 @@
 package com.jess.zapchallenge.home.model
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class PropertieResultItem(
     @SerializedName("address")
     val address: Address = Address(),
@@ -30,4 +33,4 @@ data class PropertieResultItem(
     val updatedAt: String = "",
     @SerializedName("usableAreas")
     val usableAreas: Int = 0
-)
+) : Parcelable
