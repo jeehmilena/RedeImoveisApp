@@ -23,6 +23,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 dependencies {
@@ -37,6 +41,10 @@ dependencies {
 
     //Lifecycle
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0-beta01'
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
+    implementation "androidx.activity:activity-ktx:1.1.0"
+    implementation "androidx.fragment:fragment-ktx:1.2.4"
+
 
     //    Gson
     implementation "com.google.code.gson:gson:2.8.5"

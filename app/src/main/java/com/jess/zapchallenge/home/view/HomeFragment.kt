@@ -5,23 +5,30 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jess.zapchallenge.Constants.LIST_PROPERTIES
 import com.jess.zapchallenge.Constants.TYPE_GROUP
 import com.jess.zapchallenge.R
 import com.jess.zapchallenge.home.model.PropertieResultItem
 import com.jess.zapchallenge.home.view.adapter.PropertiesAdapter
+import com.jess.zapchallenge.home.viewmodel.PropertieViewModel
+import com.jess.zapchallenge.home.viewmodel.propertieevent.PropertieEvent
+import com.jess.zapchallenge.home.viewmodel.propertieinteractor.PropertieInteractor
+import com.jess.zapchallenge.home.viewmodel.propertiestate.PropertieState
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
-    private val adapter: PropertiesAdapter by lazy {
+    private val _viewModel: PropertieViewModel by activityViewModels()
+    private var _propertieGroup: Long = 1
+    private lateinit var _listProperties: ArrayList<PropertieResultItem>
+    private val _adapter: PropertiesAdapter by lazy {
         PropertiesAdapter(
             ArrayList()
         )
     }
-
-    private var propertieGroup: Long = 1
-    private lateinit var listProperties: ArrayList<PropertieResultItem>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,14 +41,15 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         arguments?.takeIf { it.containsKey(TYPE_GROUP) }?.apply {
-            propertieGroup = getLong(TYPE_GROUP)
-            listProperties =
+            _propertieGroup = getLong(TYPE_GROUP)
+            _listProperties =
                 getParcelableArrayList<PropertieResultItem>(LIST_PROPERTIES) as ArrayList<PropertieResultItem>
         }
 
-        adapter.list = listProperties
+        _listProperties = _viewModel.listFilter(_propertieGroup.toInt())
+        _adapter.list = _listProperties
 
         recyclerViewImoveis.layoutManager = LinearLayoutManager(context)
-        recyclerViewImoveis.adapter = adapter
+        recyclerViewImoveis.adapter = _adapter
     }
 }

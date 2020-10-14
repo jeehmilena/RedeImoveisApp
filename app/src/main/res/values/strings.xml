@@ -1,6 +1,4 @@
 <resources>
     <string name="app_name">Code Challenge ZAP</string>
-    <string name="propertie_price">Aluguel: R$%s</string>
-    <string name="propertie_total_price">Total: R$%s</string>
-
+    <string name="propertie_price">Valor: R$%s</string>
 </resources>

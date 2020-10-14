@@ -8,6 +8,8 @@ import com.jess.zapchallenge.Constants.LIST_PROPERTIES
 import com.jess.zapchallenge.Constants.TYPE_GROUP
 import com.jess.zapchallenge.home.model.PropertieResultItem
 import com.jess.zapchallenge.home.view.HomeFragment
+import com.jess.zapchallenge.home.viewmodel.PropertieViewModel
+import com.jess.zapchallenge.home.viewmodel.propertieinteractor.PropertieInteractor
 
 class PropertiesPageAdapter(fragment: FragmentActivity, var list: ArrayList<PropertieResultItem>) :
     FragmentStateAdapter(fragment) {

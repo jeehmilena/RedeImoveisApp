@@ -18,7 +18,7 @@ class PropertiesAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): PropertiesAdapter.ViewHolder {
+    ): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_imovel_recyclerview, parent, false)
         return ViewHolder(
@@ -34,14 +34,16 @@ class PropertiesAdapter(
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private var propertieImage = itemView.findViewById<ImageView>(R.id.imovel_image)
         private var propertieType = itemView.findViewById<TextView>(R.id.imovel_type)
-        private var propertieNeighborhood = itemView.findViewById<TextView>(R.id.imovel_neighborhood)
+        private var propertieNeighborhood =
+            itemView.findViewById<TextView>(R.id.imovel_neighborhood)
         private var propertieCity = itemView.findViewById<TextView>(R.id.imovel_city)
         private var propertieUsableAreas = itemView.findViewById<TextView>(R.id.imovel_usableAreas)
         private var propertieBadroom = itemView.findViewById<TextView>(R.id.imovel_badroom)
         private var propertieBathroom = itemView.findViewById<TextView>(R.id.imovel_bathrooms)
-        private var propertieParkingSpaces = itemView.findViewById<TextView>(R.id.imovel_parkingSpaces)
-        private var propertiePrice = itemView.findViewById<TextView>(R.id.imovel_price)
-        private var propertieTotalPrice = itemView.findViewById<TextView>(R.id.imovel_rental_total_price)
+        private var propertieParkingSpaces =
+            itemView.findViewById<TextView>(R.id.imovel_parkingSpaces)
+        private var propertiePrice =
+            itemView.findViewById<TextView>(R.id.imovel_price)
 
         fun onBind(propertie: PropertieResultItem) {
             Picasso.get().load(propertie.images[0]).into(propertieImage)
@@ -52,19 +54,26 @@ class PropertiesAdapter(
             propertieBadroom.text = propertie.bedrooms.toString()
             propertieBathroom.text = propertie.bathrooms.toString()
             propertieParkingSpaces.text = propertie.parkingSpaces.toString()
-            propertiePrice.text = itemView.resources.getString(R.string.propertie_price, propertie.pricingInfos.price)
-            propertieTotalPrice.text = itemView.resources.getString(R.string.propertie_total_price, propertie.pricingInfos.price)
+            propertiePrice.text =
+                itemView.resources.getString(
+                    R.string.propertie_price, propertie.pricingInfos.price
+                )
+            propertiePrice.text = itemView.resources.getString(
+                R.string.propertie_price,
+                propertie.pricingInfos.price
+            )
         }
     }
 
     fun update(list: MutableList<PropertieResultItem>) {
 
         if (this.list.isEmpty()) {
-            this.list = list
+            this.list = list as ArrayList<PropertieResultItem>
         } else {
             this.list.addAll(list)
         }
         notifyDataSetChanged()
     }
+
 }
 
