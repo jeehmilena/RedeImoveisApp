@@ -8,10 +8,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.jess.zapchallenge.R
 import com.jess.zapchallenge.home.model.PropertieResultItem
+import com.jess.zapchallenge.home.viewmodel.PropertieViewModel
+import com.jess.zapchallenge.home.viewmodel.propertieinteractor.PropertieInteractor
 import com.squareup.picasso.Picasso
 
 class PropertiesAdapter(
-    var list: MutableList<PropertieResultItem>
+    var list: MutableList<PropertieResultItem>, val viewModel: PropertieViewModel
 ) : RecyclerView.Adapter<PropertiesAdapter.ViewHolder>() {
 
 
@@ -26,8 +28,12 @@ class PropertiesAdapter(
         )
     }
 
-    override fun onBindViewHolder(holder: PropertiesAdapter.ViewHolder, position: Int) =
+    override fun onBindViewHolder(holder: PropertiesAdapter.ViewHolder, position: Int) {
         holder.onBind(list[position])
+        holder.itemView.setOnClickListener {
+            viewModel.interpret(PropertieInteractor.PropertieDetail(list[position]))
+        }
+    }
 
     override fun getItemCount() = list.size
 

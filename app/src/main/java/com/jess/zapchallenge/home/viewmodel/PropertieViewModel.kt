@@ -3,11 +3,6 @@ package com.jess.zapchallenge.home.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jess.zapchallenge.Constants.MAX_RENTAL_PRICE
-import com.jess.zapchallenge.Constants.MIN_RENTAL_PRICE
-import com.jess.zapchallenge.Constants.MIN_SALE_PRICE
-import com.jess.zapchallenge.Constants.RENTAL
-import com.jess.zapchallenge.Constants.SALE
 import com.jess.zapchallenge.home.model.PropertieResultItem
 import com.jess.zapchallenge.home.repository.PropertiesRepository
 import com.jess.zapchallenge.home.usecase.PropertieUseCase
@@ -30,6 +25,7 @@ class PropertieViewModel : ViewModel() {
     fun interpret(interactor: PropertieInteractor) {
         when (interactor) {
             is PropertieInteractor.GetList -> getListProperties()
+            is PropertieInteractor.PropertieDetail -> getDetail(interactor.propertie)
         }
     }
 
@@ -60,5 +56,9 @@ class PropertieViewModel : ViewModel() {
         }
 
         return filteredList
+    }
+
+    private fun getDetail(propertie: PropertieResultItem){
+        _event.value = PropertieEvent.ShowPropertieDetail(propertie)
     }
 }

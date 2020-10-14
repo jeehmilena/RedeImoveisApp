@@ -7,17 +7,15 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.jess.zapchallenge.Constants.LIST_PROPERTIES
 import com.jess.zapchallenge.Constants.TYPE_GROUP
 import com.jess.zapchallenge.home.model.PropertieResultItem
-import com.jess.zapchallenge.home.view.HomeFragment
-import com.jess.zapchallenge.home.viewmodel.PropertieViewModel
-import com.jess.zapchallenge.home.viewmodel.propertieinteractor.PropertieInteractor
+import com.jess.zapchallenge.home.view.PropertiesFragment
 
-class PropertiesPageAdapter(fragment: FragmentActivity, var list: ArrayList<PropertieResultItem>) :
+class PropertiesPageAdapter(fragment: Fragment, var list: ArrayList<PropertieResultItem>) :
     FragmentStateAdapter(fragment) {
 
     override fun getItemCount() = 2
 
     override fun createFragment(position: Int): Fragment {
-        val homeFragment = HomeFragment()
+        val homeFragment = PropertiesFragment()
         homeFragment.arguments = Bundle().apply {
             putLong(TYPE_GROUP, position.toLong())
             putParcelableArrayList(LIST_PROPERTIES, list)
