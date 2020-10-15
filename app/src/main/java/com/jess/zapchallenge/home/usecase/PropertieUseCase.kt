@@ -36,12 +36,12 @@ class PropertieUseCase {
         (it.address.geoLocation.location.lat.toInt() != 0 && it.address.geoLocation.location.lon.toInt() != 0)
 
     private fun eligibleForZap(it: PropertieResultItem) =
-        ((it.pricingInfos.businessType == Constants.RENTAL && it.pricingInfos.price >= Constants.MIN_RENTAL_PRICE) ||
+        ((it.pricingInfos.businessType == Constants.RENTAL && it.pricingInfos.rentalTotalPrice >= Constants.MIN_RENTAL_PRICE) ||
                 (it.pricingInfos.businessType == Constants.SALE && it.pricingInfos.price >= Constants.MIN_SALE_PRICE))
 
     private fun elegibleForVivaReal(it: PropertieResultItem) =
-        ((it.pricingInfos.businessType == Constants.RENTAL && it.pricingInfos.price <= Constants.MAX_RENTAL_PRICE) ||
-                (it.pricingInfos.businessType == Constants.SALE && it.pricingInfos.price <= Constants.MAX_RENTAL_PRICE))
+        ((it.pricingInfos.businessType == Constants.RENTAL && it.pricingInfos.rentalTotalPrice <= Constants.MAX_RENTAL_PRICE) ||
+                (it.pricingInfos.businessType == Constants.SALE && it.pricingInfos.price <= Constants.MAX_SALE_PRICE))
 
     private fun boundingBoxZap(propertie: PropertieResultItem) {
         if ((propertie.address.geoLocation.location.lon >= -46.693419 && propertie.address.geoLocation.location.lat >= -23.568704)

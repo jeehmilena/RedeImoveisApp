@@ -1,4 +1,4 @@
-package com.jess.zapchallenge.home
+package com.jess.zapchallenge.home.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
