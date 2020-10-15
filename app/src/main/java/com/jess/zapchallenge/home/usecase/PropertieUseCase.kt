@@ -1,6 +1,8 @@
 package com.jess.zapchallenge.home.usecase
 
 import com.jess.zapchallenge.Constants
+import com.jess.zapchallenge.Constants.RENTAL
+import com.jess.zapchallenge.Constants.SALE
 import com.jess.zapchallenge.home.model.PropertieResultItem
 
 class PropertieUseCase {
@@ -9,7 +11,7 @@ class PropertieUseCase {
         val filteredList = arrayListOf<PropertieResultItem>()
 
         list.forEach {
-            if (eligibleForZap(it) && verifyLatLon(it) && verifyUsableArea(it)) {
+            if (eligibleForZap(it) && verifyLatLon(it)) {
                 boundingBoxZap(it)
                 filteredList.add(it)
             }
@@ -30,7 +32,7 @@ class PropertieUseCase {
     }
 
     private fun verifyUsableArea(it: PropertieResultItem) =
-        (it.usableAreas != 0 && it.usableAreas > 3500)
+        (it.usableAreas != 0 && it.usableAreas > 3500 && it.pricingInfos.businessType == SALE)
 
     private fun verifyLatLon(it: PropertieResultItem) =
         (it.address.geoLocation.location.lat.toInt() != 0 && it.address.geoLocation.location.lon.toInt() != 0)
@@ -66,8 +68,12 @@ class PropertieUseCase {
     }
 
     private fun monthlyCondoFeeVerify(propertie: PropertieResultItem): Boolean {
-        if (propertie.pricingInfos.monthlyCondoFee.isNotEmpty() && propertie.pricingInfos.rentalTotalPrice.isNotEmpty()) {
-            val monthlyCondoFeePriceDiference = (0.30 * propertie.pricingInfos.rentalTotalPrice.toDouble())
+        if (propertie.pricingInfos.monthlyCondoFee.isNotEmpty()
+            && propertie.pricingInfos.rentalTotalPrice.isNotEmpty()
+            && propertie.pricingInfos.businessType == RENTAL
+        ) {
+            val monthlyCondoFeePriceDiference =
+                (0.30 * propertie.pricingInfos.rentalTotalPrice.toDouble())
             if (monthlyCondoFeePriceDiference < propertie.pricingInfos.rentalTotalPrice.toDouble()) {
                 return true
             }

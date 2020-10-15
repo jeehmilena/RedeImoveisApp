@@ -45,7 +45,8 @@ class DetailsFragment : Fragment() {
         imovel_city_detail.text = propertie?.address?.city
         imovel_neighborhood_detail.text = propertie?.address?.neighborhood
         imovel_parkingSpaces_detail.text = propertie?.parkingSpaces.toString()
-        imovel_usableAreas_detail.text = propertie?.usableAreas.toString()
+        imovel_usableAreas_detail.text =
+            resources.getString(R.string.propertie_size, propertie?.usableAreas.toString())
 
         when (propertie?.pricingInfos?.businessType) {
             Constants.RENTAL -> {
