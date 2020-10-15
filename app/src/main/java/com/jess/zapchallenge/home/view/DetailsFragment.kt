@@ -2,18 +2,19 @@ package com.jess.zapchallenge.home.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.NavHostFragment
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
 import com.jess.zapchallenge.Constants
 import com.jess.zapchallenge.Constants.PROPERTIE_DETAIL_KEY
 import com.jess.zapchallenge.R
+import com.jess.zapchallenge.formatValue
 import com.jess.zapchallenge.home.model.PropertieResultItem
 import kotlinx.android.synthetic.main.fragment_detail.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 class DetailsFragment : Fragment() {
 
@@ -21,9 +22,7 @@ class DetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_detail, container, false)
-        setHasOptionsMenu(true)
-        return view
+        return inflater.inflate(R.layout.fragment_detail, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,23 +49,11 @@ class DetailsFragment : Fragment() {
 
         when (propertie?.pricingInfos?.businessType) {
             Constants.RENTAL -> {
-                imovel_price_detail.text = getString(
-                    R.string.propertie_price, propertie.pricingInfos.rentalTotalPrice)
-
+                imovel_price_detail.formatValue(propertie.pricingInfos.rentalTotalPrice.toDouble())
             }
             Constants.SALE -> {
-                imovel_price_detail.text = getString(
-                    R.string.propertie_price, propertie.pricingInfos.price)
+                imovel_price_detail.formatValue(propertie.pricingInfos.price.toDouble())
             }
         }
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> {
-                NavHostFragment.findNavController(this).popBackStack()
-            }
-        }
-        return true
     }
 }

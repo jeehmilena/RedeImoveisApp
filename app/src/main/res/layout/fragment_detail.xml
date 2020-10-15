@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".home.view.DetailsFragment">
-    
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarDetail"
         android:layout_width="match_parent"
@@ -67,21 +67,6 @@
         app:layout_constraintTop_toBottomOf="@+id/imovel_neighborhood_detail"
         tools:text="Moema, Sao Paulo" />
 
-    <TextView
-        android:id="@+id/imovel_price_detail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="16dp"
-        android:text="@string/propertie_price"
-        android:textColor="@color/colorPrimary"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imovel_city_detail" />
-
     <ImageView
         android:id="@+id/imageViewAreaDetail"
         android:layout_width="20dp"
@@ -91,7 +76,7 @@
         android:layout_marginTop="24dp"
         android:src="@drawable/ic_map"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imovel_price_detail" />
+        app:layout_constraintTop_toBottomOf="@+id/imovel_city_detail" />
 
     <TextView
         android:id="@+id/imovel_usableAreas_detail"
@@ -112,7 +97,7 @@
         android:layout_marginTop="24dp"
         android:src="@drawable/ic_hotel"
         app:layout_constraintStart_toEndOf="@+id/imovel_usableAreas_detail"
-        app:layout_constraintTop_toBottomOf="@+id/imovel_price_detail" />
+        app:layout_constraintTop_toBottomOf="@+id/imovel_city_detail" />
 
     <TextView
         android:id="@+id/imovel_badroom_detail"
@@ -133,7 +118,7 @@
         android:layout_marginTop="24dp"
         android:src="@drawable/ic_bathtub"
         app:layout_constraintStart_toEndOf="@+id/imovel_badroom_detail"
-        app:layout_constraintTop_toBottomOf="@+id/imovel_price_detail" />
+        app:layout_constraintTop_toBottomOf="@+id/imovel_city_detail" />
 
     <TextView
         android:id="@+id/imovel_bathrooms_detail"
@@ -154,7 +139,7 @@
         android:layout_marginTop="24dp"
         android:src="@drawable/ic_car"
         app:layout_constraintStart_toEndOf="@+id/imovel_bathrooms_detail"
-        app:layout_constraintTop_toBottomOf="@+id/imovel_price_detail" />
+        app:layout_constraintTop_toBottomOf="@+id/imovel_city_detail" />
 
     <TextView
         android:id="@+id/imovel_parkingSpaces_detail"
@@ -166,18 +151,19 @@
         app:layout_constraintTop_toTopOf="@+id/imageViewParkingSpacesDetail"
         tools:text="2 vagas" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
+    <TextView
+        android:id="@+id/imovel_price_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:background="@color/gray_e0e0e0"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="16dp"
+        tools:text="R$ 00,00"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewBathroomsDetail" />
-
+        app:layout_constraintTop_toBottomOf="@+id/imovel_parkingSpaces_detail" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

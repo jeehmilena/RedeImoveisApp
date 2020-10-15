@@ -6,8 +6,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.jess.zapchallenge.Constants.RENTAL
-import com.jess.zapchallenge.Constants.SALE
 import com.jess.zapchallenge.R
 import com.jess.zapchallenge.home.model.PropertieResultItem
 import com.squareup.picasso.Picasso
@@ -43,38 +41,12 @@ class PropertiesAdapter(
         private var propertieNeighborhood =
             itemView.findViewById<TextView>(R.id.imovel_neighborhood)
         private var propertieCity = itemView.findViewById<TextView>(R.id.imovel_city)
-        private var propertieUsableAreas = itemView.findViewById<TextView>(R.id.imovel_usableAreas)
-        private var propertieBadroom = itemView.findViewById<TextView>(R.id.imovel_badroom)
-        private var propertieBathroom = itemView.findViewById<TextView>(R.id.imovel_bathrooms)
-        private var propertieParkingSpaces =
-            itemView.findViewById<TextView>(R.id.imovel_parkingSpaces)
-        private var propertiePrice =
-            itemView.findViewById<TextView>(R.id.imovel_price)
 
         fun onBind(propertie: PropertieResultItem) {
             Picasso.get().load(propertie.images[0]).into(propertieImage)
             propertieType.text = propertie.pricingInfos.businessType
             propertieNeighborhood.text = propertie.address.neighborhood
             propertieCity.text = propertie.address.city
-            propertieUsableAreas.text = propertie.usableAreas.toString()
-            propertieBadroom.text = propertie.bedrooms.toString()
-            propertieBathroom.text = propertie.bathrooms.toString()
-            propertieParkingSpaces.text = propertie.parkingSpaces.toString()
-
-            when (propertie.pricingInfos.businessType) {
-                RENTAL -> {
-                    propertiePrice.text =
-                        itemView.resources.getString(
-                            R.string.propertie_price, propertie.pricingInfos.rentalTotalPrice
-                        )
-                }
-                SALE -> {
-                    propertiePrice.text =
-                        itemView.resources.getString(
-                            R.string.propertie_price, propertie.pricingInfos.price
-                        )
-                }
-            }
         }
     }
 
