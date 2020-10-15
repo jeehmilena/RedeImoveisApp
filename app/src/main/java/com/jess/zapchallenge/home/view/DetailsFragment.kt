@@ -7,6 +7,8 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.NavHostFragment
+import com.denzcoskun.imageslider.constants.ScaleTypes
+import com.denzcoskun.imageslider.models.SlideModel
 import com.jess.zapchallenge.Constants.PROPERTIE_DETAIL_KEY
 import com.jess.zapchallenge.R
 import com.jess.zapchallenge.home.model.PropertieResultItem
@@ -19,7 +21,9 @@ class DetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_detail, container, false)
+        val view = inflater.inflate(R.layout.fragment_detail, container, false)
+        setHasOptionsMenu(true)
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -30,7 +34,13 @@ class DetailsFragment : Fragment() {
     private fun showInfoDetailsPropertie() {
         val propertie = arguments?.getParcelable<PropertieResultItem>(PROPERTIE_DETAIL_KEY)
 
-        Picasso.get().load(propertie?.images?.get(0)).into(imovel_image_detail)
+        val imageList = ArrayList<SlideModel>()
+
+        propertie?.images?.forEach {
+            imageList.add(SlideModel(it))
+        }
+
+        image_slider.setImageList(imageList, ScaleTypes.CENTER_CROP)
         imovel_badroom_detail.text = propertie?.bedrooms.toString()
         imovel_bathrooms_detail.text = propertie?.bathrooms.toString()
         imovel_city_detail.text = propertie?.address?.city

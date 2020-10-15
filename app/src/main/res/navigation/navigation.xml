@@ -7,16 +7,27 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.jess.zapchallenge.home.view.PropertiesFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        android:name="com.jess.zapchallenge.home.view.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/action_homeFragment_to_homeDetailFragment"
-            app:destination="@id/homeDetailFragment" />
+            android:id="@+id/action_homeFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
     </fragment>
+
     <fragment
-        android:id="@+id/homeDetailFragment"
+        android:id="@+id/propertiesFragment"
+        android:name="com.jess.zapchallenge.home.view.PropertiesFragment"
+        android:label="PropertiesFragment" />
+
+    <fragment
+        android:id="@+id/detailsFragment"
         android:name="com.jess.zapchallenge.home.view.DetailsFragment"
-        android:label="fragment_home_detail"
-        tools:layout="@layout/fragment_detail" />
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" >
+        <action
+            android:id="@+id/action_detailsFragment_to_propertiesFragment"
+            app:destination="@id/propertiesFragment" />
+    </fragment>
+
 </navigation>

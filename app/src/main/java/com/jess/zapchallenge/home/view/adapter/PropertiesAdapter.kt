@@ -8,12 +8,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.jess.zapchallenge.R
 import com.jess.zapchallenge.home.model.PropertieResultItem
-import com.jess.zapchallenge.home.viewmodel.PropertieViewModel
-import com.jess.zapchallenge.home.viewmodel.propertieinteractor.PropertieInteractor
 import com.squareup.picasso.Picasso
+import kotlin.reflect.KFunction1
 
 class PropertiesAdapter(
-    var list: MutableList<PropertieResultItem>, val viewModel: PropertieViewModel
+    var list: MutableList<PropertieResultItem>,
+    val onClick: (item: PropertieResultItem) -> Unit
 ) : RecyclerView.Adapter<PropertiesAdapter.ViewHolder>() {
 
 
@@ -31,7 +31,7 @@ class PropertiesAdapter(
     override fun onBindViewHolder(holder: PropertiesAdapter.ViewHolder, position: Int) {
         holder.onBind(list[position])
         holder.itemView.setOnClickListener {
-            viewModel.interpret(PropertieInteractor.PropertieDetail(list[position]))
+            onClick(list[position])
         }
     }
 

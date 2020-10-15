@@ -1,34 +1,26 @@
 package com.jess.zapchallenge.home.view.adapter
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.jess.zapchallenge.Constants.LIST_PROPERTIES
-import com.jess.zapchallenge.Constants.TYPE_GROUP
-import com.jess.zapchallenge.home.model.PropertieResultItem
-import com.jess.zapchallenge.home.view.PropertiesFragment
+import com.jess.zapchallenge.home.model.PageAdapterItem
 
-class PropertiesPageAdapter(fragment: Fragment, var list: ArrayList<PropertieResultItem>) :
-    FragmentStateAdapter(fragment) {
+class PropertiesPageAdapter(
+    var fragments: MutableList<PageAdapterItem>,
+    fragmentManager: FragmentManager,
+    lifecycle: Lifecycle
+) : FragmentStateAdapter(fragmentManager, lifecycle) {
 
-    override fun getItemCount() = 2
+    override fun getItemCount() = fragments.size
 
-    override fun createFragment(position: Int): Fragment {
-        val homeFragment = PropertiesFragment()
-        homeFragment.arguments = Bundle().apply {
-            putLong(TYPE_GROUP, position.toLong())
-            putParcelableArrayList(LIST_PROPERTIES, list)
-        }
-        return homeFragment
-    }
+    override fun createFragment(position: Int) = fragments[position].fragment
 
-    fun update(list: MutableList<PropertieResultItem>) {
+    fun update(list: MutableList<PageAdapterItem>) {
 
-        if (this.list.isEmpty()) {
-            this.list = list as ArrayList<PropertieResultItem>
+        if (this.fragments.isEmpty()) {
+            this.fragments = list
         } else {
-            this.list.addAll(list)
+            this.fragments.addAll(list)
         }
         notifyDataSetChanged()
     }
