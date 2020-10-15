@@ -1,18 +1,18 @@
 package com.jess.zapchallenge.home.view
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
+import com.jess.zapchallenge.Constants
 import com.jess.zapchallenge.Constants.PROPERTIE_DETAIL_KEY
 import com.jess.zapchallenge.R
 import com.jess.zapchallenge.home.model.PropertieResultItem
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_detail.*
 
 class DetailsFragment : Fragment() {
@@ -46,9 +46,19 @@ class DetailsFragment : Fragment() {
         imovel_city_detail.text = propertie?.address?.city
         imovel_neighborhood_detail.text = propertie?.address?.neighborhood
         imovel_parkingSpaces_detail.text = propertie?.parkingSpaces.toString()
-        imovel_price_detail.text = propertie?.pricingInfos?.price
         imovel_usableAreas_detail.text = propertie?.usableAreas.toString()
 
+        when (propertie?.pricingInfos?.businessType) {
+            Constants.RENTAL -> {
+                imovel_price_detail.text = getString(
+                    R.string.propertie_price, propertie.pricingInfos.rentalTotalPrice)
+
+            }
+            Constants.SALE -> {
+                imovel_price_detail.text = getString(
+                    R.string.propertie_price, propertie.pricingInfos.price)
+            }
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -59,5 +69,4 @@ class DetailsFragment : Fragment() {
         }
         return true
     }
-
 }

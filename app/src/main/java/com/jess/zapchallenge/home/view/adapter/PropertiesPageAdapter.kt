@@ -14,14 +14,4 @@ class PropertiesPageAdapter(
     override fun getItemCount() = fragments.size
 
     override fun createFragment(position: Int) = fragments[position].fragment
-
-    fun update(list: MutableList<PageAdapterItem>) {
-
-        if (this.fragments.isEmpty()) {
-            this.fragments = list
-        } else {
-            this.fragments.addAll(list)
-        }
-        notifyDataSetChanged()
-    }
 }

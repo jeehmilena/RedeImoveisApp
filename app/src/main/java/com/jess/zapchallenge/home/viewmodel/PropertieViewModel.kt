@@ -17,12 +17,12 @@ class PropertieViewModel(
     private val ioDispatcher: CoroutineDispatcher,
     private val repository: PropertiesRepository
 ) : ViewModel() {
-    private var _state: MutableLiveData<PropertieState> = MutableLiveData()
-    private var _event: MutableLiveData<PropertieEvent> = MutableLiveData()
-    private val _useCase = PropertieUseCase()
-    val state = _state
-    val event = _event
-    private var _listPropertiesResult = ArrayList<PropertieResultItem>()
+    private var state: MutableLiveData<PropertieState> = MutableLiveData()
+    private var event: MutableLiveData<PropertieEvent> = MutableLiveData()
+    private val useCase = PropertieUseCase()
+    val viewState = state
+    val viewEvent = event
+    private var listPropertiesResult = ArrayList<PropertieResultItem>()
 
     fun interpret(interactor: PropertieInteractor) {
         when (interactor) {
@@ -33,15 +33,15 @@ class PropertieViewModel(
 
     private fun getListProperties() {
         viewModelScope.launch {
-            _event.value = PropertieEvent.Loading(true)
+            event.value = PropertieEvent.Loading(true)
             try {
-                _listPropertiesResult = withContext(ioDispatcher) {
+                listPropertiesResult = withContext(ioDispatcher) {
                     repository.getProperties()
                 }
-                _state.value = PropertieState.PropertiesListSuccess(_listPropertiesResult)
-                _event.value = PropertieEvent.Loading(false)
+                state.value = PropertieState.PropertiesListSuccess(listPropertiesResult)
+                event.value = PropertieEvent.Loading(false)
             } catch (ex: Exception) {
-                _state.value =
+                state.value =
                     PropertieState.PropertiesListError("Ops! Parece que tivemos algum problema =/\nTente novamente!")
             }
         }
@@ -54,14 +54,13 @@ class PropertieViewModel(
 
         var filteredList = arrayListOf<PropertieResultItem>()
         when (tabPosition) {
-            0 -> filteredList = _useCase.listGroupZap(list)
-            1 -> filteredList = _useCase.listGroupVivaReal(list)
+            0 -> filteredList = useCase.listGroupZap(list)
+            1 -> filteredList = useCase.listGroupVivaReal(list)
         }
-
         return filteredList
     }
 
     private fun getDetail(propertie: PropertieResultItem) {
-        _event.value = PropertieEvent.ShowPropertieDetail(propertie)
+        event.value = PropertieEvent.ShowPropertieDetail(propertie)
     }
 }

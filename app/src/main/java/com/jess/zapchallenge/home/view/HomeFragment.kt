@@ -26,13 +26,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.Dispatchers
 
 class HomeFragment : Fragment() {
-    private val titles = arrayListOf(GRUPO_ZAP, VIVA_REAL)
-
-    private val _pageAdapter: PropertiesPageAdapter by lazy {
-        PropertiesPageAdapter(ArrayList(), childFragmentManager, lifecycle)
-    }
-
-    private val _viewModel: PropertieViewModel by lazy {
+    private val viewModel: PropertieViewModel by lazy {
         val factory = PropertieViewModelFactory(Dispatchers.IO, PropertiesRepository())
         ViewModelProvider(this, factory).get(PropertieViewModel::class.java)
     }
@@ -51,7 +45,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun initViewModel() {
-        _viewModel.state.observe(viewLifecycleOwner, Observer { state ->
+        viewModel.viewState.observe(viewLifecycleOwner, Observer { state ->
             state?.let {
                 when (it) {
                     is PropertieState.PropertiesListSuccess -> sendList(it.properties)
@@ -59,7 +53,7 @@ class HomeFragment : Fragment() {
             }
         })
 
-        _viewModel.event.observe(viewLifecycleOwner, Observer { event ->
+        viewModel.viewEvent.observe(viewLifecycleOwner, Observer { event ->
             event?.let {
                 when (it) {
                     is PropertieEvent.Loading -> showLoading(it.status)
@@ -67,7 +61,7 @@ class HomeFragment : Fragment() {
             }
         })
 
-        _viewModel.interpret(PropertieInteractor.GetList)
+        viewModel.interpret(PropertieInteractor.GetList)
     }
 
     private fun sendList(list: ArrayList<PropertieResultItem>) {
@@ -76,7 +70,7 @@ class HomeFragment : Fragment() {
         itens.add(
             PageAdapterItem(GRUPO_ZAP, PropertiesFragment().apply {
                 arguments = Bundle().apply {
-                    putParcelableArrayList(LIST_PROPERTIES, _viewModel.listFilter(0, list))
+                    putParcelableArrayList(LIST_PROPERTIES, viewModel.listFilter(0, list))
                 }
             })
         )
@@ -84,14 +78,13 @@ class HomeFragment : Fragment() {
         itens.add(
             PageAdapterItem(VIVA_REAL, PropertiesFragment().apply {
                 arguments = Bundle().apply {
-                    putParcelableArrayList(LIST_PROPERTIES, _viewModel.listFilter(1, list))
+                    putParcelableArrayList(LIST_PROPERTIES, viewModel.listFilter(1, list))
                 }
             })
         )
 
-        _pageAdapter.update(itens)
-
-        view_pager.adapter = _pageAdapter
+        view_pager.offscreenPageLimit = itens.size
+        view_pager.adapter = PropertiesPageAdapter(itens, childFragmentManager, lifecycle)
 
         TabLayoutMediator(tabs, view_pager,
             fun(tab: TabLayout.Tab, position: Int) {

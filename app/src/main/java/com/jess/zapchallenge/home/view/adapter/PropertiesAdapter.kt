@@ -6,16 +6,16 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.jess.zapchallenge.Constants.RENTAL
+import com.jess.zapchallenge.Constants.SALE
 import com.jess.zapchallenge.R
 import com.jess.zapchallenge.home.model.PropertieResultItem
 import com.squareup.picasso.Picasso
-import kotlin.reflect.KFunction1
 
 class PropertiesAdapter(
     var list: MutableList<PropertieResultItem>,
     val onClick: (item: PropertieResultItem) -> Unit
 ) : RecyclerView.Adapter<PropertiesAdapter.ViewHolder>() {
-
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -60,10 +60,21 @@ class PropertiesAdapter(
             propertieBadroom.text = propertie.bedrooms.toString()
             propertieBathroom.text = propertie.bathrooms.toString()
             propertieParkingSpaces.text = propertie.parkingSpaces.toString()
-            propertiePrice.text =
-                itemView.resources.getString(
-                    R.string.propertie_price, propertie.pricingInfos.price
-                )
+
+            when (propertie.pricingInfos.businessType) {
+                RENTAL -> {
+                    propertiePrice.text =
+                        itemView.resources.getString(
+                            R.string.propertie_price, propertie.pricingInfos.rentalTotalPrice
+                        )
+                }
+                SALE -> {
+                    propertiePrice.text =
+                        itemView.resources.getString(
+                            R.string.propertie_price, propertie.pricingInfos.price
+                        )
+                }
+            }
         }
     }
 
@@ -76,6 +87,5 @@ class PropertiesAdapter(
         }
         notifyDataSetChanged()
     }
-
 }
 

@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jess.zapchallenge.Constants.LIST_PROPERTIES
 import com.jess.zapchallenge.Constants.PROPERTIE_DETAIL_KEY
@@ -17,9 +16,9 @@ import com.jess.zapchallenge.home.view.adapter.PropertiesAdapter
 import kotlinx.android.synthetic.main.fragment_properties.*
 
 class PropertiesFragment : Fragment() {
-    private var _listProperties = ArrayList<PropertieResultItem>()
+    private var listProperties = ArrayList<PropertieResultItem>()
 
-    private val _adapter: PropertiesAdapter by lazy {
+    private val adapter: PropertiesAdapter by lazy {
         PropertiesAdapter(
             ArrayList(), this::propertieDetail
         )
@@ -34,16 +33,18 @@ class PropertiesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        showList()
+    }
 
+    private fun showList() {
         arguments?.apply {
-            _listProperties =
+            listProperties =
                 getParcelableArrayList<PropertieResultItem>(LIST_PROPERTIES) as ArrayList<PropertieResultItem>
         }
 
-        _adapter.update(_listProperties)
-
+        adapter.update(listProperties)
         recyclerViewImoveis.layoutManager = LinearLayoutManager(context)
-        recyclerViewImoveis.adapter = _adapter
+        recyclerViewImoveis.adapter = adapter
     }
 
     private fun propertieDetail(propertie: PropertieResultItem) {
