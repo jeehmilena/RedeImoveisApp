@@ -6,9 +6,10 @@ object Constants {
     const val LIST_PROPERTIES = "lista de imoveis"
     const val RENTAL = "RENTAL"
     const val SALE = "SALE"
-    const val MIN_RENTAL_PRICE = "3500"
-    const val MIN_SALE_PRICE = "600000"
-    const val MAX_RENTAL_PRICE = "4000"
-    const val MAX_SALE_PRICE = "7000000"
+    const val MIN_RENTAL_PRICE = 3500
+    const val MIN_SALE_PRICE = 600000
+    const val MAX_RENTAL_PRICE = 4000
+    const val MAX_SALE_PRICE = 7000000
     const val PROPERTIE_DETAIL_KEY = "propertie"
+    const val USABLE_AREAS_MIN = 3500
 }
