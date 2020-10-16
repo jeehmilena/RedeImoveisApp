@@ -1,8 +1,12 @@
 package com.jess.zapchallenge.home.usecase
 
-import com.jess.zapchallenge.Constants
+import com.jess.zapchallenge.Constants.MAX_RENTAL_PRICE
+import com.jess.zapchallenge.Constants.MAX_SALE_PRICE
+import com.jess.zapchallenge.Constants.MIN_RENTAL_PRICE
+import com.jess.zapchallenge.Constants.MIN_SALE_PRICE
 import com.jess.zapchallenge.Constants.RENTAL
 import com.jess.zapchallenge.Constants.SALE
+import com.jess.zapchallenge.Constants.USABLE_AREAS_MIN
 import com.jess.zapchallenge.home.model.PropertieResultItem
 
 class PropertieUseCase {
@@ -31,19 +35,17 @@ class PropertieUseCase {
         return filteredList
     }
 
-    private fun verifyUsableArea(it: PropertieResultItem) =
-        (it.usableAreas != 0 && it.usableAreas > 3500 && it.pricingInfos.businessType == SALE)
-
     private fun verifyLatLon(it: PropertieResultItem) =
         (it.address.geoLocation.location.lat.toInt() != 0 && it.address.geoLocation.location.lon.toInt() != 0)
 
     private fun eligibleForZap(it: PropertieResultItem) =
-        ((it.pricingInfos.businessType == Constants.RENTAL && it.pricingInfos.rentalTotalPrice >= Constants.MIN_RENTAL_PRICE) ||
-                (it.pricingInfos.businessType == Constants.SALE && it.pricingInfos.price >= Constants.MIN_SALE_PRICE))
+        ((it.pricingInfos.businessType == RENTAL && it.pricingInfos.rentalTotalPrice.toDouble() >= MIN_RENTAL_PRICE) ||
+                (it.pricingInfos.businessType == SALE && it.pricingInfos.price.toDouble() >= MIN_SALE_PRICE
+                        && it.usableAreas > USABLE_AREAS_MIN))
 
     private fun elegibleForVivaReal(it: PropertieResultItem) =
-        ((it.pricingInfos.businessType == Constants.RENTAL && it.pricingInfos.rentalTotalPrice <= Constants.MAX_RENTAL_PRICE) ||
-                (it.pricingInfos.businessType == Constants.SALE && it.pricingInfos.price <= Constants.MAX_SALE_PRICE))
+        ((it.pricingInfos.businessType == RENTAL && it.pricingInfos.rentalTotalPrice.toDouble() <= MAX_RENTAL_PRICE) ||
+                (it.pricingInfos.businessType == SALE && it.pricingInfos.price.toDouble() <= MAX_SALE_PRICE))
 
     private fun boundingBoxZap(propertie: PropertieResultItem) {
         if ((propertie.address.geoLocation.location.lon >= -46.693419 && propertie.address.geoLocation.location.lat >= -23.568704)
