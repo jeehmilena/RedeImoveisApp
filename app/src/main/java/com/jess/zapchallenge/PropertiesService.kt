@@ -2,12 +2,11 @@ package com.jess.zapchallenge
 
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.google.gson.GsonBuilder
+import com.jess.zapchallenge.Constants.BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-
-const val BASE_URL = "http://grupozap-code-challenge.s3-website-us-east-1.amazonaws.com/sources/"
 
 class PropertiesService {
     companion object {
