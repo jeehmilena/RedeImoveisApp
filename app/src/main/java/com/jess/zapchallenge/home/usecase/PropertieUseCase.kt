@@ -1,9 +1,16 @@
 package com.jess.zapchallenge.home.usecase
 
+import com.jess.zapchallenge.Constants.MAX_LAT
+import com.jess.zapchallenge.Constants.MAX_LON
 import com.jess.zapchallenge.Constants.MAX_RENTAL_PRICE
 import com.jess.zapchallenge.Constants.MAX_SALE_PRICE
+import com.jess.zapchallenge.Constants.MIN_LAT
+import com.jess.zapchallenge.Constants.MIN_LON
 import com.jess.zapchallenge.Constants.MIN_RENTAL_PRICE
 import com.jess.zapchallenge.Constants.MIN_SALE_PRICE
+import com.jess.zapchallenge.Constants.PERCENTAGE_MONTHLY_CONDO_FEE
+import com.jess.zapchallenge.Constants.PERCENTAGE_RENTAL
+import com.jess.zapchallenge.Constants.PERCENTAGE_SALE
 import com.jess.zapchallenge.Constants.RENTAL
 import com.jess.zapchallenge.Constants.SALE
 import com.jess.zapchallenge.Constants.USABLE_AREAS_MIN
@@ -48,23 +55,23 @@ class PropertieUseCase {
                 (it.pricingInfos.businessType == SALE && it.pricingInfos.price.toDouble() <= MAX_SALE_PRICE))
 
     private fun boundingBoxZap(propertie: PropertieResultItem) {
-        if ((propertie.address.geoLocation.location.lon >= -46.693419 && propertie.address.geoLocation.location.lat >= -23.568704)
-            && (propertie.address.geoLocation.location.lon <= -46.641146 && propertie.address.geoLocation.location.lat <= -23.546686)
+        if ((propertie.address.geoLocation.location.lon >= MIN_LON && propertie.address.geoLocation.location.lat >= MIN_LAT)
+            && (propertie.address.geoLocation.location.lon <= MAX_LON && propertie.address.geoLocation.location.lat <= MAX_LAT)
             && propertie.pricingInfos.price.isNotEmpty()
         ) {
             val newPrice =
-                (0.10 * propertie.pricingInfos.price.toDouble()) - propertie.pricingInfos.price.toDouble()
+                (PERCENTAGE_SALE * propertie.pricingInfos.price.toDouble()) - propertie.pricingInfos.price.toDouble()
             propertie.pricingInfos.price = newPrice.toString()
         }
     }
 
     private fun boundingBoxVivaReal(propertie: PropertieResultItem) {
-        if ((propertie.address.geoLocation.location.lon >= -46.693419 && propertie.address.geoLocation.location.lat >= -23.568704)
-            && (propertie.address.geoLocation.location.lon <= -46.641146 && propertie.address.geoLocation.location.lat <= -23.546686)
+        if ((propertie.address.geoLocation.location.lon >= MIN_LON && propertie.address.geoLocation.location.lat >= MIN_LAT)
+            && (propertie.address.geoLocation.location.lon <= MAX_LON && propertie.address.geoLocation.location.lat <= MAX_LAT)
             && propertie.pricingInfos.rentalTotalPrice.isNotEmpty()
         ) {
             val newPrice =
-                (0.50 * propertie.pricingInfos.rentalTotalPrice.toDouble()) + propertie.pricingInfos.rentalTotalPrice.toDouble()
+                (PERCENTAGE_RENTAL * propertie.pricingInfos.rentalTotalPrice.toDouble()) + propertie.pricingInfos.rentalTotalPrice.toDouble()
             propertie.pricingInfos.rentalTotalPrice = newPrice.toString()
         }
     }
@@ -75,7 +82,7 @@ class PropertieUseCase {
             && propertie.pricingInfos.businessType == RENTAL
         ) {
             val monthlyCondoFeePriceDiference =
-                (0.30 * propertie.pricingInfos.rentalTotalPrice.toDouble())
+                (PERCENTAGE_MONTHLY_CONDO_FEE * propertie.pricingInfos.rentalTotalPrice.toDouble())
             if (monthlyCondoFeePriceDiference < propertie.pricingInfos.rentalTotalPrice.toDouble()) {
                 return true
             }

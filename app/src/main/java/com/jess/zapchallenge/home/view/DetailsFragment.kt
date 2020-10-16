@@ -13,8 +13,6 @@ import com.jess.zapchallenge.R
 import com.jess.zapchallenge.formatValue
 import com.jess.zapchallenge.home.model.PropertieResultItem
 import kotlinx.android.synthetic.main.fragment_detail.*
-import java.util.*
-import kotlin.collections.ArrayList
 
 class DetailsFragment : Fragment() {
 

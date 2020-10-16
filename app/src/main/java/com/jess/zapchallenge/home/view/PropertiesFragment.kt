@@ -41,10 +41,9 @@ class PropertiesFragment : Fragment() {
             listProperties =
                 getParcelableArrayList<PropertieResultItem>(LIST_PROPERTIES) as ArrayList<PropertieResultItem>
         }
-
         adapter.update(listProperties)
-        recyclerViewImoveis.layoutManager = LinearLayoutManager(context)
         recyclerViewImoveis.adapter = adapter
+        recyclerViewImoveis.layoutManager = LinearLayoutManager(context)
     }
 
     private fun propertieDetail(propertie: PropertieResultItem) {

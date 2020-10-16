@@ -31,6 +31,11 @@ class HomeFragment : Fragment() {
         ViewModelProvider(this, factory).get(PropertieViewModel::class.java)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.interpret(PropertieInteractor.GetList)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -60,8 +65,6 @@ class HomeFragment : Fragment() {
                 }
             }
         })
-
-        viewModel.interpret(PropertieInteractor.GetList)
     }
 
     private fun sendList(list: ArrayList<PropertieResultItem>) {
