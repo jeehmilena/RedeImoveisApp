@@ -22,7 +22,6 @@ class PropertieViewModel(
     private val useCase = PropertieUseCase()
     val viewState = state
     val viewEvent = event
-    private var listPropertiesResult = ArrayList<PropertieResultItem>()
 
     fun interpret(interactor: PropertieInteractor) {
         when (interactor) {
@@ -35,7 +34,7 @@ class PropertieViewModel(
         viewModelScope.launch {
             event.value = PropertieEvent.Loading(true)
             try {
-                listPropertiesResult = withContext(ioDispatcher) {
+                val listPropertiesResult = withContext(ioDispatcher) {
                     repository.getProperties()
                 }
                 state.value = PropertieState.PropertiesListSuccess(listPropertiesResult)
