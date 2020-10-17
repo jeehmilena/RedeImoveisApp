@@ -1,11 +1,14 @@
 package com.jess.zapchallenge.home.view.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.jess.zapchallenge.Constants.GRUPO_ZAP
 import com.jess.zapchallenge.R
 import com.jess.zapchallenge.home.model.PropertieResultItem
 import com.squareup.picasso.Picasso
@@ -41,12 +44,22 @@ class PropertiesAdapter(
         private var propertieNeighborhood =
             itemView.findViewById<TextView>(R.id.imovel_neighborhood)
         private var propertieCity = itemView.findViewById<TextView>(R.id.imovel_city)
+        private var groupType = itemView.findViewById<TextView>(R.id.imovel_company)
 
         fun onBind(propertie: PropertieResultItem) {
             Picasso.get().load(propertie.images[0]).into(propertieImage)
             propertieType.text = propertie.pricingInfos.businessType
             propertieNeighborhood.text = propertie.address.neighborhood
             propertieCity.text = propertie.address.city
+
+            with(groupType) {
+                if (propertie.groupType == GRUPO_ZAP) {
+                    setTextColor(ContextCompat.getColor(context, R.color.orange))
+                } else {
+                    setTextColor(ContextCompat.getColor(context, R.color.colorPrimary))
+                }
+                text = propertie.groupType
+            }
         }
     }
 

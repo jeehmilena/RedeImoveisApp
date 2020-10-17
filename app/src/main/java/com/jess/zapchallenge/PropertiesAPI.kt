@@ -5,6 +5,10 @@ import retrofit2.http.GET
 
 interface PropertiesAPI {
 
-    @GET("source-1.json")
+    companion object {
+        const val SOURCE = "source-1.json"
+    }
+
+    @GET(SOURCE)
     suspend fun getProperties(): PropertieResult
 }

@@ -1,5 +1,6 @@
 package com.jess.zapchallenge.home.usecase
 
+import com.jess.zapchallenge.Constants.GRUPO_ZAP
 import com.jess.zapchallenge.Constants.MAX_LAT
 import com.jess.zapchallenge.Constants.MAX_LON
 import com.jess.zapchallenge.Constants.MAX_RENTAL_PRICE
@@ -14,6 +15,7 @@ import com.jess.zapchallenge.Constants.PERCENTAGE_SALE
 import com.jess.zapchallenge.Constants.RENTAL
 import com.jess.zapchallenge.Constants.SALE
 import com.jess.zapchallenge.Constants.USABLE_AREAS_MIN
+import com.jess.zapchallenge.Constants.VIVA_REAL
 import com.jess.zapchallenge.home.model.PropertieResultItem
 
 class PropertieUseCase {
@@ -24,6 +26,7 @@ class PropertieUseCase {
         list.forEach {
             if (eligibleForZap(it) && verifyLatLon(it)) {
                 boundingBoxZap(it)
+                it.groupType = GRUPO_ZAP
                 filteredList.add(it)
             }
         }
@@ -36,6 +39,7 @@ class PropertieUseCase {
         list.forEach {
             if (elegibleForVivaReal(it) && verifyLatLon(it) && monthlyCondoFeeVerify(it)) {
                 boundingBoxVivaReal(it)
+                it.groupType = VIVA_REAL
                 filteredList.add(it)
             }
         }

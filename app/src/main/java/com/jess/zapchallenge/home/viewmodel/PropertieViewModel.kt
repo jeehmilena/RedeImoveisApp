@@ -51,12 +51,11 @@ class PropertieViewModel(
         list: ArrayList<PropertieResultItem>
     ): ArrayList<PropertieResultItem> {
 
-        var filteredList = arrayListOf<PropertieResultItem>()
-        when (tabPosition) {
-            0 -> filteredList = useCase.listGroupZap(list)
-            1 -> filteredList = useCase.listGroupVivaReal(list)
+        return when (tabPosition) {
+            0 -> useCase.listGroupZap(list)
+            1 -> useCase.listGroupVivaReal(list)
+            else -> ArrayList()
         }
-        return filteredList
     }
 
     private fun getDetail(propertie: PropertieResultItem) {

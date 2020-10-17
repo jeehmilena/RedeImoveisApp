@@ -32,5 +32,6 @@ data class PropertieResultItem(
     @SerializedName("updatedAt")
     val updatedAt: String = "",
     @SerializedName("usableAreas")
-    val usableAreas: Int = 0
+    val usableAreas: Int = 0,
+    var groupType: String = ""
 ) : Parcelable
