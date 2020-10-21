@@ -4,5 +4,5 @@ import com.jess.zapchallenge.PropertiesService
 
 class PropertiesRepository {
 
-    suspend fun getProperties() = PropertiesService.SERVICE.getProperties()
+    suspend fun getProperties() = PropertiesService.getApi().getProperties()
 }

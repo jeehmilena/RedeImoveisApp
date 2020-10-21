@@ -1,7 +1,6 @@
 package com.jess.zapchallenge
 
 object Constants {
-    const val BASE_URL = "http://grupozap-code-challenge.s3-website-us-east-1.amazonaws.com/sources/"
     const val GRUPO_ZAP = "GRUPO ZAP"
     const val VIVA_REAL = "VIVA REAL"
     const val LIST_PROPERTIES = "lista de imoveis"
