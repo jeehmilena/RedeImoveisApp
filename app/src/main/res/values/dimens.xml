@@ -5,4 +5,18 @@
     <dimen name="appbar_padding">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="appbar_padding_top">8dp</dimen>
+    <dimen name="appbar_title_size">20sp</dimen>
+    <dimen name="margin_start">16dp</dimen>
+    <dimen name="margin_left">16dp</dimen>
+    <dimen name="margin_top_24">24dp</dimen>
+    <dimen name="title_size_16">16sp</dimen>
+    <dimen name="margin_top_8">8dp</dimen>
+    <dimen name="widht_20">20dp</dimen>
+    <dimen name="height_20">20dp</dimen>
+    <dimen name="margint_start_4">4dp</dimen>
+    <dimen name="margin_left_4">4dp</dimen>
+    <dimen name="margin_bottom_16">16dp</dimen>
+    <dimen name="image_height_230">230dp</dimen>
+    <dimen name="margin_top_16">16dp</dimen>
+    <dimen name="title_size_14">14sp</dimen>
 </resources>

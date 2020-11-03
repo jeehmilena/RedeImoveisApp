@@ -1,5 +1,11 @@
 <resources>
-    <string name="app_name">eng-zap-challenge-kotlin</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
+    <string name="app_name">Code Challenge</string>
+    <string name="propertie_size">%s m²</string>
+    <string name="home_title">Home</string>
+    <string name="detail_title">Detalhe</string>
+    <string name="icon_area_detail">icon area detail</string>
+    <string name="icon_badroom_detail">icon badroom detail</string>
+    <string name="icon_bathrooms_detail">icon bathrooms detail</string>
+    <string name="icon_parking_spaces_detail">icon parking spaces detail</string>
+    <string name="image_propertie">image propertie</string>
 </resources>
